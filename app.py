@@ -80,6 +80,5 @@ add_selectbox = st.sidebar.selectbox(
 # From the command line, run
 #  streamlit run stremalit.py
 
-
 df_games = get_last_n_kuzigames(10)
 st.write(df_games)
