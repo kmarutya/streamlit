@@ -39,6 +39,17 @@ def get_last_n_kuzigames(last_n: int = 10) -> pd.DataFrame:
 
 st.write("Кузинтара")
 
+# Approximate coordinates (latitude, longitude)
+cities = {
+    "San Francisco": (37.7749, -122.4194),
+    "San Diego": (32.7157, -117.1611),
+    "Seattle": (47.6062, -122.3321),
+    "New York City": (40.7128, -74.0060),
+    "Boston": (42.3601, -71.0589)
+}
+
+# Create a NumPy array
+coordinates_array = np.array(list(cities.values()))
 
 st.write("Here's our first attempt at using data to create a table:")
 st.write(pd.DataFrame({
@@ -55,8 +66,9 @@ st.line_chart(chart_data)
 
 # plot map
 map_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=['lat', 'lon'])
+    coordinates_array,
+    columns=['lat', 'lon']
+)
 
 st.map(map_data)
 
