@@ -72,10 +72,6 @@ map_data = pd.DataFrame(
 
 st.map(map_data)
 
-# widgets
-x = st.slider('x')  # 👈 this is a widget
-st.write(x, 'squared is', x * x)
-
 # Add a selectbox to the sidebar:
 add_selectbox = st.sidebar.selectbox(
     'How would you like to be contacted?',
