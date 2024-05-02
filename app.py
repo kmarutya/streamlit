@@ -37,14 +37,7 @@ def get_last_n_kuzigames(last_n: int = 10) -> pd.DataFrame:
 
     return tail
 
-st.write("Hello world")
-
-df = pd.DataFrame({
-  'first column': [1, 2, 3, 4],
-  'second column': [10, 20, 30, 40]
-})
-
-df
+st.write("Кузинтара")
 
 
 st.write("Here's our first attempt at using data to create a table:")
