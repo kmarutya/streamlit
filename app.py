@@ -33,29 +33,35 @@ def get_last_n_kuzigames(last_n: int = 10) -> pd.DataFrame:
     df = df[df.apply(lambda row: row.str.lower().eq('играли').sum() <= 2, axis=1)]
 
     # Get tail and trim columns
-    tail = df.tail(last_n).iloc[:, :8].fillna('')
+    tail = df.tail(last_n).iloc[:, :9].fillna('')
 
     return tail
 
-st.write("Кузинтара")
 
-# Approximate coordinates (latitude, longitude)
-cities = {
-    "San Francisco": (37.7749, -122.4194),
-    "San Diego": (32.7157, -117.1611),
-    "Seattle": (47.6062, -122.3321),
-    "New York City": (40.7128, -74.0060),
-    "Boston": (42.3601, -71.0589)
-}
+def plot_geo():
+    # Approximate coordinates (latitude, longitude)
+    cities = {
+        "San Francisco": (37.7749, -122.4194),
+        "San Diego": (32.7157, -117.1611),
+        "Seattle": (47.6062, -122.3321),
+        "New York City": (40.7128, -74.0060),
+        "Boston": (42.3601, -71.0589)
+    }
 
-# Create a NumPy array
-coordinates_array = np.array(list(cities.values()))
+    # Create a NumPy array
+    coordinates_array = np.array(list(cities.values()))
 
-st.write("Here's our first attempt at using data to create a table:")
-st.write(pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-}))
+    st.write("Here's our first attempt at using data to create a table:")
+    st.write(pd.DataFrame({
+        'first column': [1, 2, 3, 4],
+        'second column': [10, 20, 30, 40]
+    }))
+    # plot map
+    map_data = pd.DataFrame(
+        coordinates_array,
+        columns=['lat', 'lon']
+    )
+    st.map(map_data)
 
 
 chart_data = pd.DataFrame(
@@ -64,13 +70,10 @@ chart_data = pd.DataFrame(
 
 st.line_chart(chart_data)
 
-# plot map
-map_data = pd.DataFrame(
-    coordinates_array,
-    columns=['lat', 'lon']
-)
 
-st.map(map_data)
+st.write("Кузинтара")
+plot_geo()
+
 
 # Add a selectbox to the sidebar:
 add_selectbox = st.sidebar.selectbox(
@@ -78,8 +81,6 @@ add_selectbox = st.sidebar.selectbox(
     ('Email', 'Home phone', 'Mobile phone')
 )
 
-# From the command line, run
-#  streamlit run stremalit.py
 
 df_games = get_last_n_kuzigames(10)
 st.write(df_games)
